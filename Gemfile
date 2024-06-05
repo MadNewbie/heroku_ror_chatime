@@ -72,3 +72,9 @@ group :test do
 end
 
 gem "devise", "~> 4.8.1", "< 4.9"
+
+gem "image_processing", "~> 1.12"
+
+gem "mini_magick", "~> 4.12"
+
+gem "ruby-vips", "~> 2.2"

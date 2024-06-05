@@ -4,7 +4,7 @@ class Room < ApplicationRecord
     after_create_commit {broadcast_if_public}
 
     has_many :messages
-    has_many :participans, dependent: :destroy
+    has_many :participants, dependent: :destroy
 
     def broadcast_if_public
         broadcast_append_to "rooms" unless is_private
@@ -16,5 +16,10 @@ class Room < ApplicationRecord
             Participant.create(user_id: user.id, room_id: single_room.id)
         end
         single_room
+    end
+
+    def participant?(room, user)
+        room.participants.where(user: user).exists?
+        # Participant.where(user_id: user.id, room_id: room.id).exists?
     end
 end
